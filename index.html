@@ -1,1 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cadastro de Pré-Venda | Horto Ville III</title>
+<style>
+:root{--navy:#062b50;--navy2:#0b416e;--blue:#176eb1;--gold:#e9b83f;--ink:#142b45;--muted:#5b6d80;--line:#b8cadd;--paper:#fff;--bg:#eaf0f5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--ink)}
+.toolbar{position:sticky;top:0;z-index:50;display:flex;justify-content:center;align-items:center;gap:9px;flex-wrap:wrap;padding:12px;background:var(--navy);box-shadow:0 2px 12px #0002}
+button,.tool-link{border:0;border-radius:7px;padding:11px 16px;font-weight:700;font-size:14px;cursor:pointer;text-decoration:none}
+.btn-gold{background:var(--gold);color:var(--navy)}.btn-white,.tool-link{background:white;color:var(--navy)}
+.instructions{max-width:210mm;margin:14px auto;padding:12px 16px;background:#fff;border-left:4px solid var(--gold);border-radius:7px;font-size:13px;line-height:1.5}
+.page{width:210mm;min-height:297mm;margin:14px auto;background:var(--paper);padding:11mm 12mm 10mm;box-shadow:0 4px 20px #1b355022;position:relative;display:flex;flex-direction:column;gap:5mm}
+.brand{height:39mm;background:linear-gradient(112deg,var(--navy) 0 37%,#0a4777 37% 100%);color:#fff;border-radius:4mm;position:relative;overflow:hidden;padding:5mm 7mm;display:flex;align-items:center;justify-content:space-between}
+.brand:after{content:"";position:absolute;right:33%;top:-30mm;width:2mm;height:100mm;background:var(--gold);transform:rotate(33deg)}
+.brand-left{position:relative;z-index:1;width:44%}.brand-right{position:relative;z-index:1;text-align:right;width:48%}
+.logo{font-size:34pt;line-height:.9;font-weight:900;letter-spacing:-2px}.company{font-size:10pt;font-weight:700;margin-top:2mm;letter-spacing:.4px}
+.creci{display:inline-block;background:#fff;color:var(--navy);font-size:8pt;font-weight:700;border-radius:2mm;padding:1mm 3mm;margin-top:1.5mm}
+.tagline{font-family:Georgia,serif;font-size:10pt;margin-top:2mm}
+.project{font-family:Georgia,serif;font-weight:700;font-size:21pt;line-height:.95;color:#fff}.project small{display:block;font:700 7pt Arial;letter-spacing:1.3px;margin-top:2mm}
+.doc-title{display:flex;align-items:center;gap:4mm;border-bottom:2px solid var(--gold);padding:1mm 0 3mm}
+.doc-title .icon{width:13mm;height:13mm;border-radius:3mm;background:var(--navy);color:white;display:grid;place-items:center;font-size:22pt;font-weight:bold}
+.doc-title h1{margin:0;color:var(--navy);font-size:20pt;line-height:1}.doc-title p{margin:1.5mm 0 0;color:var(--muted);font-size:9pt}
+.section{border:1px solid var(--line);border-radius:3mm;overflow:hidden}
+.section-head{background:var(--navy);color:#fff;padding:2.2mm 4mm;font-size:10pt;font-weight:700;letter-spacing:.3px;display:flex;align-items:center;gap:2mm}
+.section-head .num{color:var(--gold);font-size:12pt}
+.section-body{padding:3mm 3.5mm;display:grid;gap:2.5mm}
+.grid{display:grid;gap:2.5mm}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1.2fr .8fr 1fr}.g4{grid-template-columns:1fr 1fr 1fr 1fr}
+.field{display:flex;flex-direction:column;gap:1mm;min-width:0}
+label{font-size:7.5pt;font-weight:700;color:var(--navy)}
+input,select,textarea{width:100%;border:1px solid #9eb5ca;border-radius:1.5mm;padding:2mm 2.2mm;font:9pt Arial;color:var(--ink);background:#fff;min-height:8mm;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 2px #176eb11a}
+textarea{resize:vertical;min-height:17mm}
+.inline{display:flex;gap:4mm;flex-wrap:wrap;align-items:center}
+.choice{display:flex;align-items:center;gap:1.5mm;font-size:9pt}
+.choice input{width:4mm;height:4mm;min-height:0;accent-color:var(--navy)}
+.money{position:relative}.money:before{content:"R$";position:absolute;left:2.5mm;top:50%;transform:translateY(-50%);font-size:9pt;color:var(--muted);pointer-events:none}.money input{padding-left:10mm}
+.notice{background:#f5f8fb;border:1px solid var(--line);border-radius:2mm;padding:3mm;font-size:8pt;line-height:1.45}
+.footer{margin-top:auto;border-top:1px solid var(--line);padding-top:2.5mm;display:flex;justify-content:space-between;gap:4mm;font-size:7.5pt;color:var(--muted)}
+.contact{background:var(--navy);color:#fff;border-radius:3mm;padding:3mm 4mm;display:flex;justify-content:space-between;align-items:center;gap:3mm;font-size:8pt}
+.contact strong{color:var(--gold);font-size:12pt}
+.contact .contact-col{flex:1}
+.signature-grid{display:grid;grid-template-columns:1fr 1fr;gap:9mm;margin-top:4mm}
+.sign{border-top:1px solid var(--navy);padding-top:2mm;text-align:center;font-size:8pt;color:var(--muted);margin-top:9mm}
+.doc-list{display:grid;grid-template-columns:1fr 1fr;gap:2mm 7mm}
+.doc-item{display:flex;align-items:center;gap:2mm;padding:2mm;border-bottom:1px solid #e1e8ef;font-size:9pt}
+.doc-item input{width:4.5mm;height:4.5mm;min-height:0;accent-color:var(--navy)}
+.receipt-meta{display:grid;grid-template-columns:1fr 1fr;gap:3mm}
+.page-note{font-size:7.5pt;color:var(--muted);line-height:1.4}
+@media(max-width:850px){.page{width:100%;min-height:auto;margin:8px auto;padding:16px;gap:12px}.brand{height:auto;min-height:125px}.logo{font-size:27pt}.project{font-size:17pt}.doc-title h1{font-size:17pt}.instructions{margin:8px}}
+@media print{
+ @page{size:A4 portrait;margin:0}
+ body{background:white;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ .toolbar,.instructions{display:none!important}
+ main{margin:0}
+ .page{width:210mm;height:297mm;min-height:297mm;margin:0;padding:8mm 11mm 7mm;box-shadow:none;page-break-after:always;break-after:page;gap:2.2mm;overflow:visible}
+ .page:last-of-type{page-break-after:auto;break-after:auto}
+ input,select,textarea{border:0;border-bottom:1px solid #9eb5ca;border-radius:0;padding:.7mm 1mm;box-shadow:none!important;background:transparent;font-size:8pt;min-height:5mm}
+ textarea{border:1px solid #9eb5ca;min-height:11mm}
+ label{font-size:7pt}
+ .grid,.section-body{gap:1.2mm}
+ .section{break-inside:avoid}.section-body{padding:1.6mm 2.5mm}
+ .section-head{padding:1.5mm 3mm;font-size:9pt}
+ .brand{height:27mm;flex:none;padding:3mm 6mm}.logo{font-size:27pt}.project{font-size:18pt}.tagline{font-size:8pt;margin-top:1mm}.doc-title{flex:none;padding:0 0 1.5mm}.doc-title .icon{width:10mm;height:10mm;font-size:18pt}.doc-title h1{font-size:17pt}.doc-title p{margin-top:1mm;font-size:8pt}
+ .field{gap:.4mm}
+ .contact{padding:2mm 3mm;font-size:7pt}.contact strong{font-size:10pt}
+ .signature-grid{gap:7mm;margin-top:1mm}.sign{margin-top:3mm;padding-top:1mm;font-size:7pt}
+ .footer{padding-top:1.5mm;font-size:6.5pt}
+ .notice{padding:2mm;font-size:7pt}
+ .field input[type=date]{color:transparent;position:relative}
+ .field input[type=date]:after{content:attr(data-print);color:var(--ink);position:absolute;left:1mm;top:1.3mm}
+ .contact{flex:none}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+ <button class="btn-gold" onclick="window.print()">Salvar ficha em PDF</button>
+ <button class="btn-white" onclick="resetForm()">Limpar formulário</button>
+ <a class="tool-link" href="https://assinador.iti.br/" target="_blank" rel="noopener">Assinar pelo GOV.BR</a>
+</div>
+<div class="instructions">
+ <b>Preenchimento:</b> digite nos campos, selecione as datas no calendário e informe valores em reais. O formulário salva automaticamente neste navegador.
+ Para gerar o documento, clique em <b>Salvar ficha em PDF</b> e escolha “Salvar como PDF”. Depois, envie o PDF ao Assinador GOV.BR para assinatura eletrônica.
+</div>
+
+<main>
+<section class="page">
+ <header class="brand">
+  <div class="brand-left"><div class="logo">WR</div><div class="company">WALTER RODRIGUES IMÓVEIS</div><div class="creci">CRECI 2326J</div><div class="tagline">O imóvel certo para cada fase da sua vida!</div></div>
+  <div class="brand-right"><div class="project">HORTO<br>VILLE III<small>QUALIDADE DE VIDA EM UM NOVO CAPÍTULO</small></div></div>
+ </header>
+ <div class="doc-title"><div class="icon">✎</div><div><h1>CADASTRO DE PRÉ-VENDA</h1><p>Ficha de cadastro de interessados — Horto Ville III</p></div></div>
+ <div class="field"><label>Corretor(a) responsável</label><input value="Klebson Souza | CRECI 37964 | (75) 98219-3793" readonly></div>
+
+ <section class="section">
+  <div class="section-head"><span class="num">01</span> PROPONENTE 1</div>
+  <div class="section-body">
+   <div class="grid g3">
+    <div class="field" style="grid-column:span 2"><label>Nome completo *</label><input data-key="p1_nome" required></div>
+    <div class="field"><label>Estado civil</label><select data-key="p1_estado"><option value="">Selecione</option><option>Solteiro(a)</option><option>Casado(a)</option><option>União estável</option><option>Divorciado(a)</option><option>Viúvo(a)</option></select></div>
+   </div>
+   <div class="grid" style="grid-template-columns:2fr .45fr 1.25fr">
+    <div class="field"><label>Endereço</label><input data-key="p1_endereco"></div><div class="field"><label>Nº</label><input data-key="p1_numero"></div><div class="field"><label>Bairro</label><input data-key="p1_bairro"></div>
+   </div>
+   <div class="grid" style="grid-template-columns:1.5fr .45fr .7fr">
+    <div class="field"><label>Cidade</label><input data-key="p1_cidade"></div><div class="field"><label>UF</label><input maxlength="2" data-key="p1_uf"></div><div class="field"><label>CEP</label><input data-key="p1_cep" inputmode="numeric" data-mask="cep"></div>
+   </div>
+   <div class="grid g3">
+    <div class="field"><label>RG</label><input data-key="p1_rg"></div><div class="field"><label>CPF</label><input data-key="p1_cpf" inputmode="numeric" data-mask="cpf"></div><div class="field"><label>Data de nascimento</label><input type="date" data-key="p1_nascimento"></div>
+   </div>
+   <div class="grid g3">
+    <div class="field"><label>Renda mensal</label><div class="money"><input data-key="p1_renda" data-money inputmode="decimal" placeholder="0,00"></div></div>
+    <div class="field"><label>E-mail</label><input type="email" data-key="p1_email"></div>
+    <div class="field"><label>Contato (WhatsApp)</label><input data-key="p1_whatsapp" data-mask="phone" inputmode="tel"></div>
+   </div>
+  </div>
+ </section>
+
+ <section class="section">
+  <div class="section-head"><span class="num">02</span> PROPONENTE 2 <span style="font-weight:400">(CÔNJUGE / COMPANHEIRO(A))</span></div>
+  <div class="section-body">
+   <div class="grid g3">
+    <div class="field" style="grid-column:span 2"><label>Nome completo</label><input data-key="p2_nome"></div>
+    <div class="field"><label>Estado civil</label><select data-key="p2_estado"><option value="">Selecione</option><option>Solteiro(a)</option><option>Casado(a)</option><option>União estável</option><option>Divorciado(a)</option><option>Viúvo(a)</option></select></div>
+   </div>
+   <div class="grid" style="grid-template-columns:2fr .45fr 1.25fr">
+    <div class="field"><label>Endereço</label><input data-key="p2_endereco"></div><div class="field"><label>Nº</label><input data-key="p2_numero"></div><div class="field"><label>Bairro</label><input data-key="p2_bairro"></div>
+   </div>
+   <div class="grid" style="grid-template-columns:1.5fr .45fr .7fr">
+    <div class="field"><label>Cidade</label><input data-key="p2_cidade"></div><div class="field"><label>UF</label><input maxlength="2" data-key="p2_uf"></div><div class="field"><label>CEP</label><input data-key="p2_cep" inputmode="numeric" data-mask="cep"></div>
+   </div>
+   <div class="grid g3">
+    <div class="field"><label>RG</label><input data-key="p2_rg"></div><div class="field"><label>CPF</label><input data-key="p2_cpf" data-mask="cpf" inputmode="numeric"></div><div class="field"><label>Data de nascimento</label><input type="date" data-key="p2_nascimento"></div>
+   </div>
+   <div class="grid g3">
+    <div class="field"><label>Renda mensal</label><div class="money"><input data-key="p2_renda" data-money inputmode="decimal" placeholder="0,00"></div></div>
+    <div class="field"><label>E-mail</label><input type="email" data-key="p2_email"></div>
+    <div class="field"><label>Contato (WhatsApp)</label><input data-key="p2_whatsapp" data-mask="phone" inputmode="tel"></div>
+   </div>
+  </div>
+ </section>
+
+ <section class="section">
+  <div class="section-head"><span class="num">03</span> DADOS DA PREFERÊNCIA</div>
+  <div class="section-body">
+   <div class="grid" style="grid-template-columns:1.15fr .9fr 1.4fr;align-items:start">
+    <div class="field"><label>Pretensão de lotes</label><div class="inline" style="padding-top:2mm">
+     <label class="choice"><input type="checkbox" data-key="pref_residencial"> Residencial</label>
+     <label class="choice"><input type="checkbox" data-key="pref_comercial"> Comercial</label>
+     <label class="choice"><input type="checkbox" data-key="pref_indiferente"> Indiferente</label>
+    </div></div>
+    <div class="field"><label>Pretensão de entrada</label><div class="money"><input data-key="entrada" data-money inputmode="decimal" placeholder="0,00"></div></div>
+    <div class="field"><label>Observações</label><textarea data-key="pref_obs"></textarea></div>
+   </div>
+  </div>
+ </section>
+
+ <section class="section">
+  <div class="section-head"><span class="num">04</span> AUTORIZAÇÃO DE CONSULTA DE CRÉDITO</div>
+  <div class="section-body">
+   <div class="grid" style="grid-template-columns:1.7fr 1fr;align-items:center">
+    <div class="notice">Autorizo a Walter Rodrigues Imóveis a realizar consulta aos órgãos de proteção ao crédito (SPC e Serasa), com o objetivo de análise de crédito para viabilização da minha proposta de aquisição no empreendimento Horto Ville III.</div>
+    <div>
+     <label class="choice"><input type="checkbox" data-key="autoriza_credito"> Autorizo a consulta de SPC e Serasa.</label>
+     <div class="grid g2" style="margin-top:3mm"><div class="field"><label>Local</label><input data-key="credito_local"></div><div class="field"><label>Data</label><input type="date" data-key="credito_data"></div></div>
+    </div>
+   </div>
+  </div>
+ </section>
+ <div class="contact">
+  <div class="contact-col"><b>FALE COM SEU CORRETOR</b><br><strong>(75) 98219-3793</strong></div>
+  <div class="contact-col">Instagram<br><b>@walterrodriguesimoveis</b></div>
+  <div class="contact-col">Santo Antônio de Jesus — BA<br>e Região</div>
+ </div>
+ <div class="signature-grid">
+  <div class="sign">Assinatura do(s) proponente(s)</div>
+  <div class="sign">Local e data</div>
+ </div>
+ <footer class="footer"><span>WALTER RODRIGUES IMÓVEIS • CRECI 2326J</span><span>Horto Ville III • Cadastro de pré-venda • 1/2</span></footer>
+</section>
+
+<section class="page">
+ <header class="brand">
+  <div class="brand-left"><div class="logo">WR</div><div class="company">WALTER RODRIGUES IMÓVEIS</div><div class="creci">CRECI 2326J</div><div class="tagline">O imóvel certo para cada fase da sua vida!</div></div>
+  <div class="brand-right"><div class="project">HORTO<br>VILLE III<small>QUALIDADE DE VIDA EM UM NOVO CAPÍTULO</small></div></div>
+ </header>
+ <div class="doc-title"><div class="icon">▤</div><div><h1>DOCUMENTOS ENTREGUES</h1><p>Verso do cadastro de pré-venda — controle de recebimento</p></div></div>
+ <section class="section">
+  <div class="section-head"><span class="num">05</span> CONFERÊNCIA DOS DOCUMENTOS</div>
+  <div class="section-body">
+   <p style="font-size:9pt;margin:0 0 1mm">Marque os documentos entregues pelo cliente:</p>
+   <div class="doc-list">
+    <label class="doc-item"><input type="checkbox" data-key="doc_rg"> RG</label>
+    <label class="doc-item"><input type="checkbox" data-key="doc_cpf"> CPF</label>
+    <label class="doc-item"><input type="checkbox" data-key="doc_endereco"> Comprovante de endereço</label>
+    <label class="doc-item"><input type="checkbox" data-key="doc_renda_informal"> Comprovante de renda informal</label>
+    <label class="doc-item"><input type="checkbox" data-key="doc_renda_formal"> Comprovante de renda formal</label>
+    <label class="doc-item"><input type="checkbox" data-key="doc_certidao"> Certidão de nascimento / casamento</label>
+   </div>
+  </div>
+ </section>
+ <section class="section">
+  <div class="section-head"><span class="num">06</span> IDENTIFICAÇÃO E RECEBIMENTO</div>
+  <div class="section-body">
+   <div class="field"><label>Nome do Proponente 1</label><input data-key="rec_p1"></div>
+   <div class="field"><label>Nome do Proponente 2</label><input data-key="rec_p2"></div>
+   <div class="grid g2">
+    <div class="field"><label>Corretor(a) responsável</label><input value="Klebson Souza" readonly></div>
+    <div class="field"><label>CRECI</label><input value="37964" readonly></div>
+   </div>
+   <div class="grid g2">
+    <div class="field"><label>Data do recebimento</label><input type="date" data-key="data_recebimento"></div>
+    <div class="field"><label>Unidade / lote de interesse (opcional)</label><input data-key="unidade_interesse"></div>
+   </div>
+   <div class="field"><label>Observações</label><textarea style="min-height:38mm" data-key="rec_obs"></textarea></div>
+  </div>
+ </section>
+ <section class="section">
+  <div class="section-head"><span class="num">07</span> ASSINATURAS</div>
+  <div class="section-body">
+   <div class="signature-grid" style="margin-top:0">
+    <div class="sign">Assinatura do cliente</div><div class="sign">Assinatura do responsável pelo recebimento</div>
+   </div>
+   <div class="grid g2" style="margin-top:4mm">
+    <div class="field"><label>Local</label><input data-key="rec_local"></div><div class="field"><label>Data</label><input type="date" data-key="rec_data"></div>
+   </div>
+  </div>
+ </section>
+ <div class="contact">
+  <div class="contact-col"><b>FALE COM SEU CORRETOR</b><br><strong>(75) 98219-3793</strong></div>
+  <div class="contact-col">Instagram<br><b>@walterrodriguesimoveis</b></div>
+  <div class="contact-col">Santo Antônio de Jesus — BA<br>e Região</div>
+ </div>
+ <div class="notice"><b>Assinatura eletrônica pelo GOV.BR:</b> gere primeiro o PDF desta ficha. Acesse <b>assinador.iti.br</b>, entre com sua conta gov.br nível Prata ou Ouro, carregue o PDF, posicione a assinatura, confirme e baixe o documento assinado. Compartilhe o arquivo assinado com as partes. A assinatura eletrônica não substitui a leitura e concordância com o conteúdo do documento.</div>
+ <footer class="footer"><span>WALTER RODRIGUES IMÓVEIS • CRECI 2326J</span><span>Horto Ville III • Documentos entregues • 2/2</span></footer>
+</section>
+</main>
+<script>
+const all=[...document.querySelectorAll('[data-key]')];
+function load(){
+ all.forEach(el=>{
+  const k='horto_pre_venda_v2_'+el.dataset.key, v=localStorage.getItem(k);
+  if(v!==null){if(el.type==='checkbox')el.checked=v==='1';else el.value=v;}
+ });
+}
+function save(el){const k='horto_pre_venda_v2_'+el.dataset.key;localStorage.setItem(k,el.type==='checkbox'?(el.checked?'1':'0'):el.value);}
+all.forEach(el=>{
+ el.addEventListener('input',()=>save(el));el.addEventListener('change',()=>save(el));
+ if(el.dataset.money){
+  el.addEventListener('blur',()=>{
+   let raw=el.value.replace(/[^\d,.-]/g,'').replace(/\./g,'').replace(',','.');
+   if(raw!==''&&!isNaN(Number(raw)))el.value=Number(raw).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+   save(el);
+  });
+ }
+ if(el.dataset.mask==='cpf')el.addEventListener('input',()=>{let v=el.value.replace(/\D/g,'').slice(0,11);v=v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2');el.value=v;save(el)});
+ if(el.dataset.mask==='cep')el.addEventListener('input',()=>{let v=el.value.replace(/\D/g,'').slice(0,8);el.value=v.replace(/(\d{5})(\d)/,'$1-$2');save(el)});
+ if(el.dataset.mask==='phone')el.addEventListener('input',()=>{let v=el.value.replace(/\D/g,'').slice(0,11);if(v.length>10)v=v.replace(/(\d{2})(\d{5})(\d{4})/,'($1) $2-$3');else if(v.length>6)v=v.replace(/(\d{2})(\d{4})(\d{0,4})/,'($1) $2-$3');else if(v.length>2)v=v.replace(/(\d{2})(\d+)/,'($1) $2');el.value=v;save(el)});
+});
+function resetForm(){if(!confirm('Apagar os dados salvos deste formulário neste navegador?'))return;all.forEach(el=>{localStorage.removeItem('horto_pre_venda_v2_'+el.dataset.key);if(el.type==='checkbox')el.checked=false;else if(!el.readOnly)el.value='';});}
+load();
+</script>
+</body></html>
 
