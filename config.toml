@@ -1,0 +1,2 @@
+[functions.receber-ficha]
+verify_jwt = false
