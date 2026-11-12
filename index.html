@@ -55,35 +55,71 @@ textarea{resize:vertical;min-height:17mm}
  @page{size:A4 portrait;margin:0}
  body{background:white;-webkit-print-color-adjust:exact;print-color-adjust:exact}
  .toolbar,.instructions{display:none!important}
- main{margin:0}
- .page{width:210mm;height:297mm;min-height:297mm;margin:0;padding:8mm 11mm 7mm;box-shadow:none;page-break-after:always;break-after:page;gap:2.2mm;overflow:visible}
+ .page{width:210mm;height:297mm;min-height:297mm;margin:0;padding:10mm 12mm 9mm;box-shadow:none;page-break-after:always;break-after:page;gap:4mm;overflow:hidden}
  .page:last-of-type{page-break-after:auto;break-after:auto}
- input,select,textarea{border:0;border-bottom:1px solid #9eb5ca;border-radius:0;padding:.7mm 1mm;box-shadow:none!important;background:transparent;font-size:8pt;min-height:5mm}
- textarea{border:1px solid #9eb5ca;min-height:11mm}
- label{font-size:7pt}
- .grid,.section-body{gap:1.2mm}
- .section{break-inside:avoid}.section-body{padding:1.6mm 2.5mm}
- .section-head{padding:1.5mm 3mm;font-size:9pt}
- .brand{height:27mm;flex:none;padding:3mm 6mm}.logo{font-size:27pt}.project{font-size:18pt}.tagline{font-size:8pt;margin-top:1mm}.doc-title{flex:none;padding:0 0 1.5mm}.doc-title .icon{width:10mm;height:10mm;font-size:18pt}.doc-title h1{font-size:17pt}.doc-title p{margin-top:1mm;font-size:8pt}
- .field{gap:.4mm}
- .contact{padding:2mm 3mm;font-size:7pt}.contact strong{font-size:10pt}
- .signature-grid{gap:7mm;margin-top:1mm}.sign{margin-top:3mm;padding-top:1mm;font-size:7pt}
- .footer{padding-top:1.5mm;font-size:6.5pt}
- .notice{padding:2mm;font-size:7pt}
+ input,select,textarea{border:0;border-bottom:1px solid #9eb5ca;border-radius:0;padding:1.3mm 1mm;box-shadow:none!important;background:transparent;font-size:8.5pt;min-height:6mm}
+ textarea{border:1px solid #9eb5ca;min-height:15mm}
+ .section{break-inside:avoid}.section-body{gap:2mm;padding:2.5mm 3mm}
+ .brand{height:35mm;flex:none}.doc-title{flex:none}
  .field input[type=date]{color:transparent;position:relative}
  .field input[type=date]:after{content:attr(data-print);color:var(--ink);position:absolute;left:1mm;top:1.3mm}
  .contact{flex:none}
+ .page>*{flex-shrink:0}
+ .section{overflow:visible}
+ .section-head{padding:1.4mm 3mm;font-size:9pt}.section-head .num{font-size:10pt}
+ .section-body{gap:1.2mm;padding:1.6mm 3mm}
+ .grid{gap:2mm}.field{gap:.5mm}
+ label{font-size:7pt}
+ input,select{min-height:5mm;padding:.8mm 1mm;font-size:8pt}
+ textarea{min-height:9mm;font-size:8pt}
+ .page{padding:7mm 11mm 6mm;gap:2.5mm}
+ .brand{height:26mm;padding:3mm 6mm}
+ .logo{font-size:26pt}.project{font-size:17pt}
+ .doc-title .icon{width:10mm;height:10mm;font-size:16pt}.doc-title h1{font-size:16pt}
+ .notice{padding:2mm;font-size:7.5pt;line-height:1.35}
+ .contact{padding:2mm 4mm}
+ .signature-grid{margin-top:1mm;gap:9mm}.sign{margin-top:5mm;padding-top:1.5mm}
+ .footer{padding-top:1.5mm}
 }
+.broker{flex:none;display:flex;align-items:center;gap:3mm;flex-wrap:wrap;border:1px solid var(--line);border-left:1.6mm solid var(--gold);border-radius:2mm;background:#f5f8fb;padding:2mm 3.5mm}
+.bk-tag{width:100%;font-size:6.5pt;font-weight:700;letter-spacing:1px;color:var(--blue)}
+.bk-main{font-size:10pt;color:var(--navy);flex:1}.bk-main span{display:inline-block;background:var(--navy);color:#fff;font-size:8pt;font-weight:700;border-radius:2mm;padding:.6mm 2.5mm;margin-left:2mm}
+.bk-tel{font-size:9pt;font-weight:700;color:var(--navy)}
+.wbroker{margin-top:18px;padding-top:12px;border-top:1px solid #e1e8ef;font-size:13px;line-height:1.5;color:var(--muted);text-align:center}.wbroker b{color:var(--navy)}.wbroker small{display:block;font-size:11px;letter-spacing:.8px;color:var(--blue);font-weight:700}
+.wgov{display:block;text-align:center;background:var(--navy);color:#fff;border-radius:7px;padding:14px;font-weight:700;text-decoration:none;margin-top:10px}
+.wstep{font-size:13px;font-weight:700;color:var(--navy);margin:14px 0 6px}
+@media print{#wiz{display:none!important}input[type=date]::-webkit-calendar-picker-indicator{display:none}}
+@media screen{body.wiz .page,body.wiz .toolbar,body.wiz .instructions{display:none}}
+#wiz{display:none;position:fixed;inset:0;z-index:100;background:linear-gradient(160deg,var(--navy),var(--navy2));overflow:auto;padding:16px;align-items:center;justify-content:center}
+body.wiz #wiz{display:flex}
+.wcard{background:#fff;border-radius:18px;width:100%;max-width:560px;padding:26px 24px;box-shadow:0 20px 60px #0006;margin:auto}
+.wbrand{font-weight:900;color:var(--navy);letter-spacing:.5px;font-size:13px;display:flex;justify-content:space-between;align-items:center}.wbrand span{color:var(--muted);font-weight:400}
+.wbar{height:6px;background:#e1e8ef;border-radius:9px;margin:14px 0 22px;overflow:hidden}.wbar i{display:block;height:100%;background:var(--gold);transition:width .3s}
+.wsec{color:var(--blue);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.wq{font-size:24px;line-height:1.2;color:var(--navy);margin:6px 0 6px;font-family:Georgia,serif}
+.wh{color:var(--muted);font-size:14px;line-height:1.4;margin:0 0 16px}
+.wcard input,.wcard textarea{font-size:20px;padding:12px 14px;border-radius:10px;min-height:52px;border:2px solid #9eb5ca}
+.wcard input:focus,.wcard textarea:focus{border-color:var(--blue)}
+.wopts{display:grid;gap:10px}.wopt{background:#f5f8fb;color:var(--navy);border:2px solid var(--line);text-align:left;padding:14px 16px;font-size:16px}
+.wopt.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.werr{color:#b3261e;font-size:14px;min-height:20px;margin-top:8px;font-weight:700}
+.wnav{display:flex;gap:10px;margin-top:14px}.wnav button{flex:1;padding:14px}.wnav .wback{flex:0 0 auto;background:#e1e8ef;color:var(--navy)}
+.wnext{background:var(--navy);color:#fff}.wskip{background:none;color:var(--muted);font-weight:400;width:100%;margin-top:6px;text-decoration:underline}
+.wsum{background:#f5f8fb;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:14px;line-height:1.7;margin:12px 0}
+.wprivacy{display:flex;gap:10px;align-items:flex-start;background:#fff8df;border:1px solid #e9b83f;border-radius:9px;padding:12px;font-size:13px;line-height:1.45;margin:12px 0}.wprivacy input{width:20px!important;height:20px;min-height:20px!important;flex:0 0 20px;margin:0;accent-color:var(--navy)}.wstatus{font-size:14px;line-height:1.4;min-height:20px;margin:8px 0;color:var(--navy)}.wstatus.error{color:#b3261e}.wstatus.ok{color:#176b36}
 </style>
+<script id="turnstile-api" src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 </head>
 <body>
+<div id="wiz"></div>
 <div class="toolbar">
+ <button class="btn-white" onclick="openWizard()">Preencher passo a passo</button>
  <button class="btn-gold" onclick="window.print()">Salvar ficha em PDF</button>
  <button class="btn-white" onclick="resetForm()">Limpar formulário</button>
  <a class="tool-link" href="https://assinador.iti.br/" target="_blank" rel="noopener">Assinar pelo GOV.BR</a>
 </div>
 <div class="instructions">
- <b>Preenchimento:</b> digite nos campos, selecione as datas no calendário e informe valores em reais. O formulário salva automaticamente neste navegador.
+ <b>Preenchimento:</b> a ficha salva automaticamente neste navegador. Ao concluir e confirmar o envio, uma cópia será gravada na base de dados restrita do corretor no Supabase; depois você poderá salvar o PDF.
  Para gerar o documento, clique em <b>Salvar ficha em PDF</b> e escolha “Salvar como PDF”. Depois, envie o PDF ao Assinador GOV.BR para assinatura eletrônica.
 </div>
 
@@ -94,7 +130,7 @@ textarea{resize:vertical;min-height:17mm}
   <div class="brand-right"><div class="project">HORTO<br>VILLE III<small>QUALIDADE DE VIDA EM UM NOVO CAPÍTULO</small></div></div>
  </header>
  <div class="doc-title"><div class="icon">✎</div><div><h1>CADASTRO DE PRÉ-VENDA</h1><p>Ficha de cadastro de interessados — Horto Ville III</p></div></div>
- <div class="field"><label>Corretor(a) responsável</label><input value="Klebson Souza | CRECI 37964 | (75) 98219-3793" readonly></div>
+ <div class="broker"><div class="bk-tag">EM PARCERIA COM WR WALTER RODRIGUES IMÓVEIS</div><div class="bk-main"><b>Klebson Souza</b> — seu Corretor Imobiliário <span>CRECI-BA 37964</span></div><div class="bk-tel">WhatsApp (75) 98219-3793</div></div>
 
  <section class="section">
   <div class="section-head"><span class="num">01</span> PROPONENTE 1</div>
@@ -209,8 +245,8 @@ textarea{resize:vertical;min-height:17mm}
    <div class="field"><label>Nome do Proponente 1</label><input data-key="rec_p1"></div>
    <div class="field"><label>Nome do Proponente 2</label><input data-key="rec_p2"></div>
    <div class="grid g2">
-    <div class="field"><label>Corretor(a) responsável</label><input value="Klebson Souza" readonly></div>
-    <div class="field"><label>CRECI</label><input value="37964" readonly></div>
+    <div class="field"><label>Corretor(a) responsável</label><input value="Klebson Souza — Corretor Imobiliário" readonly></div>
+    <div class="field"><label>CRECI</label><input value="CRECI-BA 37964" readonly></div>
    </div>
    <div class="grid g2">
     <div class="field"><label>Data do recebimento</label><input type="date" data-key="data_recebimento"></div>
@@ -240,6 +276,10 @@ textarea{resize:vertical;min-height:17mm}
 </section>
 </main>
 <script>
+// Configure these public values before publishing. Never put server secrets here.
+const EDGE_FUNCTION_URL='';
+const TURNSTILE_SITE_KEY='';
+const SUPABASE_PUBLISHABLE_KEY='';
 const all=[...document.querySelectorAll('[data-key]')];
 function load(){
  all.forEach(el=>{
@@ -263,6 +303,89 @@ all.forEach(el=>{
 });
 function resetForm(){if(!confirm('Apagar os dados salvos deste formulário neste navegador?'))return;all.forEach(el=>{localStorage.removeItem('horto_pre_venda_v2_'+el.dataset.key);if(el.type==='checkbox')el.checked=false;else if(!el.readOnly)el.value='';});}
 load();
+</script>
+<script>
+(function(){
+const LS='horto_pre_venda_v2_',K=k=>document.querySelector('[data-key="'+k+'"]'),today=()=>new Date().toISOString().slice(0,10);
+const get=k=>k[0]==='_'?localStorage.getItem('hw'+k)||'':(K(k).type==='checkbox'?(K(k).checked?'1':''):K(k).value);
+function set(k,v){if(k[0]==='_'){localStorage.setItem('hw'+k,v);return}const e=K(k);if(e.type==='checkbox')e.checked=!!v;else e.value=v;e.dispatchEvent(new Event('input'));e.dispatchEvent(new Event('change'));if(e.dataset.money)e.dispatchEvent(new Event('blur'))}
+const UF=['Solteiro(a)','Casado(a)','União estável','Divorciado(a)','Viúvo(a)'];
+const addr=(p,sh)=>[['cep','Qual o CEP?','Vamos preencher o endereço automaticamente.','numeric'],['endereco','Qual a rua / endereço?'],['numero','Qual o número?'],['bairro','Qual o bairro?'],['cidade','Qual a cidade?'],['uf','Qual o estado (UF)?','Exemplo: BA']].map(a=>({k:p+'_'+a[0],q:a[1],h:a[2],m:a[3],sec:sh,show:p==='p2'?()=>get('_same')!=='Sim':0,max:a[0]==='uf'?2:0,opt:a[0]!=='endereco'&&a[0]!=='cidade'}));
+const person=(p,sec,who)=>[
+{k:p+'_nome',q:'Qual o nome completo'+who+'?',h:'Como está no documento.',req:1,sec},
+{k:p+'_nascimento',q:'Qual a data de nascimento'+who+'?',t:'date',sec,opt:1},
+{k:p+'_cpf',q:'Qual o CPF'+who+'?',m:'numeric',req:1,len:14,sec},
+{k:p+'_rg',q:'Qual o RG'+who+'?',sec,opt:1},
+{k:p+'_estado',q:'Qual o estado civil'+who+'?',t:'choice',o:UF,sec,opt:1},
+{k:p+'_whatsapp',q:'Qual o WhatsApp'+who+'?',h:'Com DDD.',m:'tel',req:1,len:14,sec},
+{k:p+'_email',q:'Qual o e-mail'+who+'?',t:'email',sec,opt:1}];
+const rend=p=>({k:p+'_renda',q:'Qual a renda mensal'+(p==='p2'?' do cônjuge':'')+'?',h:'Valor aproximado em reais.',m:'decimal',sec:p==='p2'?'Proponente 2':'Proponente 1',opt:1});
+const DOCS=[['doc_rg','RG'],['doc_cpf','CPF'],['doc_endereco','Comprovante de endereço'],['doc_renda_informal','Renda informal'],['doc_renda_formal','Renda formal'],['doc_certidao','Certidão nascimento/casamento']];
+const ALL=[{t:'intro'},...person('p1','Proponente 1',''),...addr('p1','Proponente 1'),rend('p1'),
+{k:'_p2',q:'Haverá um segundo proponente (cônjuge ou companheiro(a))?',t:'choice',o:['Sim','Não'],sec:'Proponente 2'},
+...person('p2','Proponente 2',' do cônjuge').map(s=>({...s,show:()=>get('_p2')==='Sim'})),
+{k:'_same',q:'Mora no mesmo endereço do proponente 1?',t:'choice',o:['Sim','Não'],sec:'Proponente 2',show:()=>get('_p2')==='Sim'},
+...addr('p2','Proponente 2').map(s=>({...s,show:()=>get('_p2')==='Sim'&&get('_same')!=='Sim'})),
+{...rend('p2'),show:()=>get('_p2')==='Sim'},
+{k:'_tipo',q:'Qual tipo de lote você procura?',t:'choice',o:['Residencial','Comercial','Indiferente'],sec:'Preferência',apply:v=>{['residencial','comercial','indiferente'].forEach(x=>set('pref_'+x,v.toLowerCase()===x))}},
+{k:'entrada',q:'Quanto pretende dar de entrada?',h:'Valor aproximado em reais.',m:'decimal',sec:'Preferência',opt:1},
+{k:'pref_obs',q:'Quer deixar alguma observação?',h:'Ex.: tamanho do lote, localização, prazo.',t:'area',sec:'Preferência',opt:1},
+{k:'unidade_interesse',q:'Já tem algum lote ou unidade de interesse?',sec:'Preferência',opt:1},
+{k:'autoriza_credito',q:'Você autoriza a consulta de crédito?',h:'Autorizo a Walter Rodrigues Imóveis a consultar SPC e Serasa para análise de crédito da minha proposta no Horto Ville III.',t:'choice',o:['Autorizo','Não autorizo'],sec:'Autorização',get:()=>get('autoriza_credito')?'Autorizo':(localStorage.getItem('hw_ac')||''),apply:v=>{localStorage.setItem('hw_ac',v);set('autoriza_credito',v==='Autorizo')}},
+{k:'credito_local',q:'Onde você está assinando (cidade)?',sec:'Autorização',def:()=>get('p1_cidade'),opt:1},
+{k:'credito_data',q:'Qual a data de hoje?',t:'date',sec:'Autorização',def:today,opt:1},
+{t:'multi',q:'Quais documentos você já tem em mãos?',h:'Marque os que você vai entregar ao corretor.',sec:'Documentos'},
+{t:'end'}];
+let i=0;const W=document.getElementById('wiz');
+const steps=()=>ALL.filter(s=>!s.show||s.show());
+function fmtDates(){document.querySelectorAll('input[type=date]').forEach(e=>e.dataset.print=e.value?e.value.split('-').reverse().join('/'):'')}
+function finalize(){const d=today(),c=get('p1_cidade');[['rec_p1',get('p1_nome')],['rec_p2',get('_p2')==='Sim'?get('p2_nome'):''],['data_recebimento',d],['rec_data',get('rec_data')||d],['rec_local',get('rec_local')||c],['credito_data',get('credito_data')||d],['credito_local',get('credito_local')||c]].forEach(([k,v])=>set(k,v));fmtDates()}
+async function cep(){const v=get('p1_cep').replace(/\D/g,'');return v}
+async function lookup(p){const v=get(p+'_cep').replace(/\D/g,'');if(v.length!==8)return;try{const r=await fetch('https://viacep.com.br/ws/'+v+'/json/');const j=await r.json();if(j.erro)return;[['endereco',j.logradouro],['bairro',j.bairro],['cidade',j.localidade],['uf',j.uf]].forEach(([k,x])=>{if(x&&!get(p+'_'+k))set(p+'_'+k,x)})}catch(e){}}
+function render(){renderStep();const c=W.querySelector(".wcard");if(c){const d=document.createElement("div");d.className="wbroker";d.innerHTML="<small>EM PARCERIA COM WR WALTER RODRIGUES IMÓVEIS</small><b>Klebson Souza</b> — seu Corretor Imobiliário<br>CRECI-BA 37964 • WhatsApp (75) 98219-3793";c.appendChild(d)}}
+function renderStep(){
+ const S=steps(),s=S[i],pct=Math.round(i/(S.length-1)*100);
+ let h='<div class="wcard"><div class="wbrand">WR • HORTO VILLE III<span>'+(s.t==='intro'||s.t==='end'?'':(i)+' / '+(S.length-2))+'</span></div><div class="wbar"><i style="width:'+pct+'%"></i></div>';
+ if(s.t==='intro'){h+='<div class="wq" style="font-size:28px">Cadastro de pré-venda</div><p class="wh">Olá! Vamos preencher seu cadastro em poucos passos, uma pergunta por vez. No final, você pode enviar uma cópia segura e salvar o PDF. Leva cerca de 3 minutos.</p><div class="wnav"><button class="wnext" id="wn">Começar</button></div><button class="wskip" id="wfull">Prefiro ver a ficha completa</button></div>';W.innerHTML=h;document.getElementById('wn').onclick=()=>{i++;render()};document.getElementById('wfull').onclick=()=>document.body.classList.remove('wiz');return}
+ if(s.t==='end'){finalize();const t=get('_tipo');h+='<div class="wq">Tudo pronto! 🎉</div><p class="wh">Revise o resumo. Para guardar uma cópia na base do corretor, confirme o aviso e faça a verificação de segurança. Depois, a ficha será aberta para salvar em PDF.</p><div class="wsum"><b>'+esc(get('p1_nome'))+'</b><br>CPF: '+esc(get('p1_cpf'))+'<br>WhatsApp: '+esc(get('p1_whatsapp'))+(get('_p2')==='Sim'?'<br>Cônjuge: '+esc(get('p2_nome')):'')+(t?'<br>Tipo de lote: '+esc(t):'')+(get('entrada')?'<br>Entrada: R$ '+esc(get('entrada')):'')+'<br>Consulta de crédito: '+(get('autoriza_credito')?'autorizada':'não autorizada')+'</div><label class="wprivacy"><input id="privacy-ack" type="checkbox"'+(localStorage.getItem('hw_privacy_ack')==='1'?' checked':'')+'> <span>Confirmo que fui informado de que, ao enviar, os dados desta ficha serão armazenados em base restrita para atendimento da proposta de pré-venda.</span></label><div id="turnstile-widget"></div><div id="save-status" class="wstatus" role="status" aria-live="polite"></div><div class="wnav"><button class="wback" id="wb">Voltar</button><button class="btn-gold" id="wsend">Enviar cópia e salvar PDF</button></div><div class="wstep">Após o envio, você também pode assinar o PDF no GOV.BR.</div><a class="wgov" href="https://assinador.iti.br/" target="_blank" rel="noopener">Ir para o GOV.BR e assinar →</a><button class="wskip" id="wpdf-only">Salvar PDF sem enviar</button><button class="wskip" id="wfull">Ver a ficha completa</button></div>';W.innerHTML=h;
+  const ack=document.getElementById('privacy-ack');ack.onchange=()=>localStorage.setItem('hw_privacy_ack',ack.checked?'1':'0');
+  const status=document.getElementById('save-status'),send=document.getElementById('wsend'),widget=document.getElementById('turnstile-widget');
+  const showStatus=(message,type='')=>{status.textContent=message;status.className='wstatus '+type;};
+  const renderTurnstile=()=>{if(TURNSTILE_SITE_KEY&&window.turnstile&&!widget.dataset.widgetId){widget.dataset.widgetId=window.turnstile.render(widget,{sitekey:TURNSTILE_SITE_KEY});}};
+  renderTurnstile();document.getElementById('turnstile-api')?.addEventListener('load',renderTurnstile,{once:true});
+  document.getElementById('wb').onclick=()=>{i--;render()};
+  document.getElementById('wfull').onclick=()=>document.body.classList.remove('wiz');
+  document.getElementById('wpdf-only').onclick=()=>{finalize();window.print()};
+  send.onclick=async()=>{
+   if(!ack.checked){showStatus('Confirme que leu o aviso de armazenamento para continuar.','error');return;}
+   if(!EDGE_FUNCTION_URL||!TURNSTILE_SITE_KEY||!SUPABASE_PUBLISHABLE_KEY){showStatus('A conexão com o Supabase ainda precisa ser configurada. Consulte o README desta pasta.','error');return;}
+   renderTurnstile();const token=window.turnstile?.getResponse?.(widget.dataset.widgetId);if(!token){showStatus('Faça a verificação de segurança acima antes de enviar.','error');return;}
+   const fields={};all.forEach(el=>{fields[el.dataset.key]=el.type==='checkbox'?el.checked:(el.value.trim()||null);});fields._p2=get('_p2');fields._same=get('_same');fields._tipo=get('_tipo');fields.autoriza_credito_resposta=localStorage.getItem('hw_ac')||'';fields.aviso_armazenamento_confirmado=true;
+   send.disabled=true;send.textContent='Enviando…';showStatus('Enviando a cópia para a base restrita…');
+   try{const response=await fetch(EDGE_FUNCTION_URL,{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_PUBLISHABLE_KEY},body:JSON.stringify({fields,turnstileToken:token,website:''})});const result=await response.json().catch(()=>({}));if(!response.ok)throw new Error(result.error||'Não foi possível guardar o cadastro.');showStatus('Cópia guardada na base do Supabase. A janela de impressão será aberta.','ok');window.turnstile?.reset?.(widget.dataset.widgetId);setTimeout(()=>window.print(),350);}
+   catch(error){showStatus(error.message+' Seus dados continuam neste navegador. Tente novamente ou salve apenas o PDF.','error');window.turnstile?.reset?.(widget.dataset.widgetId);send.disabled=false;send.textContent='Tentar enviar novamente';}
+  };
+  return}
+ h+='<div class="wsec">'+s.sec+'</div><div class="wq">'+s.q+'</div><p class="wh">'+(s.h||'')+'</p><div id="wi"></div><div class="werr" id="we"></div><div class="wnav">'+(i>1?'<button class="wback" id="wb">←</button>':'')+'<button class="wnext" id="wn">Continuar</button></div>'+(s.opt?'<button class="wskip" id="wsk">Pular</button>':'')+'</div>';
+ W.innerHTML=h;const box=document.getElementById('wi');let inp;
+ const next=async()=>{const err=document.getElementById('we');
+  if(s.t==='choice'){const v=box.dataset.v||'';if(!v&&!s.opt){err.textContent='Escolha uma opção.';return}if(v){set(s.k,v);}if(s.k==='_same'&&v==='Sim')['endereco','numero','bairro','cep','cidade','uf'].forEach(x=>set('p2_'+x,get('p1_'+x)));if(s.apply&&v)s.apply(v)}
+  else if(s.t==='multi'){box.querySelectorAll('input').forEach(c=>set(c.dataset.k,c.checked))}
+  else{let v=inp.value.trim();if(s.t==='date'&&v){const d=toISO(v);if(!d){err.textContent='Data inválida. Digite dia/mês/ano, ex.: 10/05/1990.';return}v=d}if(s.req&&!v){err.textContent='Este campo é obrigatório.';return}if(s.len&&v&&v.length<s.len){err.textContent='Confira o número digitado.';return}if(s.t==='email'&&v&&!/^\S+@\S+\.\S+$/.test(v)){err.textContent='E-mail inválido.';return}set(s.k,v);if(/_cep$/.test(s.k))await lookup(s.k.slice(0,2))}
+  i++;render()};
+ if(s.t==='choice'){const cur=s.get?s.get():get(s.k);box.dataset.v=cur;box.className='wopts';box.innerHTML=s.o.map(o=>'<button class="wopt'+(o===cur?' on':'')+'">'+o+'</button>').join('');box.querySelectorAll('button').forEach(b=>b.onclick=()=>{box.dataset.v=b.textContent;box.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));setTimeout(next,180)})}
+ else if(s.t==='multi'){box.className='wopts';box.innerHTML=DOCS.map(d=>'<label class="wopt" style="display:flex;gap:10px;align-items:center;font-size:16px"><input type="checkbox" data-k="'+d[0]+'" style="width:22px;height:22px;min-height:0"'+(get(d[0])?' checked':'')+'> '+d[1]+'</label>').join('')}
+ else{inp=document.createElement(s.t==='area'?'textarea':'input');if(s.t==='date'){inp.type='text';inp.inputMode='numeric';inp.placeholder='dd/mm/aaaa';inp.maxLength=10;inp.addEventListener('input',()=>{let v=inp.value.replace(/\D/g,'').slice(0,8);inp.value=v.replace(/(\d{2})(\d)/,'$1/$2').replace(/(\d{2})\/(\d{2})(\d)/,'$1/$2/$3')})}if(s.t==='email')inp.type='email';if(s.m)inp.inputMode=s.m;if(s.max)inp.maxLength=s.max;inp.value=s.t==='date'?toBR(get(s.k)||(s.def?s.def():'')):(get(s.k)||(s.def?s.def():''));if(s.k.endsWith('_uf'))inp.style.textTransform='uppercase';inp.autocomplete='off';box.appendChild(inp);if(s.k==='credito_data'){const hb=document.createElement('button');hb.className='wopt';hb.style.marginTop='10px';hb.textContent='Usar a data de hoje';hb.onclick=()=>{inp.value=toBR(today())};box.appendChild(hb)}
+  const mk=document.querySelector('[data-key="'+s.k+'"]');if(mk&&mk.dataset.mask&&!mk.dataset.money){inp.addEventListener('input',()=>{mk.value=inp.value;mk.dispatchEvent(new Event('input'));inp.value=mk.value})}
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter'&&s.t!=='area'){e.preventDefault();next()}});setTimeout(()=>inp.focus(),50)}
+ document.getElementById('wn').onclick=next;const b=document.getElementById('wb');if(b)b.onclick=()=>{i--;render()};const sk=document.getElementById('wsk');if(sk)sk.onclick=()=>{i++;render()}}
+const toBR=d=>d?d.split('-').reverse().join('/'):'';const toISO=b=>{const m=b.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);if(!m)return null;const d=+m[1],mo=+m[2],y=+m[3],t=new Date(y,mo-1,d);if(y<1900||y>2100||t.getMonth()!==mo-1||t.getDate()!==d)return null;return m[3]+'-'+m[2]+'-'+m[1]};
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+document.querySelectorAll('input[type=date]').forEach(e=>{e.addEventListener('input',fmtDates);e.addEventListener('change',fmtDates)});
+window.addEventListener('beforeprint',fmtDates);fmtDates();
+window.openWizard=()=>{i=0;document.body.classList.add('wiz');render()};
+document.body.classList.add('wiz');render();
+})();
 </script>
 </body></html>
 
