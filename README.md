@@ -1,41 +1,43 @@
-# Ficha Interativa de Pré-Venda — Horto Ville III
+# Diário de Trade & Gestão de Risco (dashboard dinâmico)
 
-Este pacote publica a ficha interativa e uma área administrativa para consultar os cadastros guardados no Supabase.
+Site estático de **um único arquivo** (`index.html`): diário de trades, painel de risco, calculadora de posição, dashboard com 12 gráficos e relatórios (mensal e operacional). Não precisa de servidor, cadastro nem instalação.
 
-## Publicar no GitHub Pages
+## Como publicar de graça no GitHub Pages (sem usar terminal)
 
-1. Envie todos os arquivos desta pasta à raiz do repositório. `index.html` e `admin.html` devem ficar na raiz; mantenha também a pasta `supabase/`.
-2. No GitHub, abra **Settings → Pages** e selecione **Deploy from a branch**, branch `main`, pasta `/ (root)`. Salve e aguarde a publicação.
-3. Anote a origem do site (por exemplo, `https://seu-usuario.github.io`) e o hostname correspondente (`seu-usuario.github.io`). Se usar domínio próprio, use a origem e o hostname desse domínio.
+1. Crie uma conta em <https://github.com> (se ainda não tiver).
+2. Clique em **New repository** (botão verde ou o **+** no topo). Dê um nome (ex.: `diario-trade`), marque **Public** e clique em **Create repository**.
+3. Na página do repositório, clique em **uploading an existing file** (ou **Add file → Upload files**), arraste o `index.html` e o `README.md` e clique em **Commit changes**.
+4. Vá em **Settings → Pages**. Em **Build and deployment**, escolha **Source: Deploy from a branch**, **Branch: main** e pasta **/ (root)**, e clique em **Save**.
+5. Aguarde de 1 a 3 minutos. O endereço aparece na própria página de Pages e segue o formato:
+   `https://SEU-USUARIO.github.io/diario-trade/`
 
-## Preparar o Supabase
+Para atualizar depois: abra o `index.html` no repositório, clique no lápis (✏️), edite e faça **Commit changes**.
 
-1. No Supabase, crie ou selecione o projeto que receberá os cadastros. Em **SQL Editor**, execute `supabase/pre_venda_cadastros.sql`.
-2. Em **Authentication → Users**, crie a conta administrativa que consultará as fichas. Confirme o usuário e anote seu UUID; ele será usado como `ADMIN_USER_ID`.
-3. Crie um widget no Cloudflare Turnstile para o hostname do site e anote a **site key** e a **secret key**.
-4. Publique uma Edge Function chamada `receber-ficha` com o conteúdo de `supabase/functions/receber-ficha/index.ts`. Desative **Verify JWT** para essa função; ela verifica o Turnstile antes de gravar. A configuração correspondente também está em `supabase/config.toml`.
-5. Cadastre estes segredos nas configurações de Edge Function Secrets do Supabase:
-   - `ADMIN_USER_ID`: UUID do usuário administrativo criado no passo 2.
-   - `ALLOWED_ORIGIN`: origem exata do GitHub Pages, sem caminho e sem barra final (por exemplo, `https://seu-usuario.github.io`).
-   - `TURNSTILE_SECRET_KEY`: secret key do widget.
-   - `TURNSTILE_HOSTNAME`: hostname autorizado, sem protocolo ou caminho (por exemplo, `seu-usuario.github.io`).
+> No plano gratuito, o GitHub Pages exige repositório **público**. Isso torna público apenas o **código**. Seus trades **não** vão para o GitHub (veja "Onde ficam seus dados").
 
-O runtime da Edge Function fornece `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY`. Nunca coloque essas credenciais de servidor ou a `TURNSTILE_SECRET_KEY` em arquivos do site ou no GitHub.
+## Como usar (5 passos)
 
-## Configurar os arquivos públicos
+1. **Config**: ajuste capital inicial, risco por trade, perda diária/semanal, drawdown máximo, máx. de trades e RR mínimo. Cadastre seus ativos com o **valor do ponto** (WINFUT 0,20; WDOFUT 10; ações 1 — confirme na sua corretora). Os valores iniciais são **exemplos**.
+2. **Gestão de Risco**: antes de operar, veja o **status geral** (Liberado / Atenção / Parar de operar) e use a **calculadora de posição** (entrada, stop, alvo → quantidade). O botão “Levar para o diário” já preenche o formulário.
+3. **Diário**: preencha o formulário e salve. Aparecem em tempo real risco em R$ e %, RR e quantidade sugerida. Deixe a saída em branco para trades abertos e feche depois em **Editar**.
+4. **Dashboard**: 30 indicadores e 12 gráficos atualizados a cada trade.
+5. **Relatórios**: resultado mensal por ano, relatório operacional (overtrading, dias que estouraram o limite, trades sem stop, score de disciplina) e desempenho por setup, ativo, direção, dia, horário, emoção, erro e plano.
 
-Em `index.html`, preencha as três constantes no início do primeiro script:
+Dica: clique em **Carregar exemplo** para ver tudo funcionando com 30 trades fictícios e **Apagar tudo** para começar do zero.
 
-- `EDGE_FUNCTION_URL`: `https://SEU_PROJECT_REF.supabase.co/functions/v1/receber-ficha`
-- `TURNSTILE_SITE_KEY`: site key pública do widget.
-- `SUPABASE_PUBLISHABLE_KEY`: publishable key (ou a chave pública `anon`) do projeto.
+## Onde ficam seus dados
 
-Em `admin.html`, preencha `SUPABASE_URL` e `SUPABASE_ANON_KEY` com a URL e a chave pública do mesmo projeto. Essas chaves são públicas; a proteção dos cadastros depende da Edge Function e das políticas RLS do SQL.
+- Tudo é salvo **no seu navegador** (localStorage), neste aparelho. Nada é enviado a servidores.
+- Cada navegador/aparelho tem seus próprios dados. Para levar de um lugar para outro, use **Backup (JSON)** e **Restaurar**.
+- Limpar os dados do navegador apaga o diário: **faça backup com frequência**. Há também **Exportar CSV** (abre no Excel).
+- No celular, abra o site e use “Adicionar à tela inicial” para ter um atalho.
 
-Depois de preencher as configurações, envie as alterações para o GitHub. A ficha ficará na página inicial; a área restrita de consulta ficará em `/admin.html`. Entre nela com a conta administrativa do Supabase.
+## Detalhes técnicos
 
-## Envio e armazenamento
+- Os gráficos usam o Chart.js 4.4.1 carregado de CDN (precisa de internet). Para uso offline, baixe o `chart.umd.min.js`, coloque na mesma pasta e troque o `src` da tag `<script>` no `index.html`.
+- Os cálculos (risco, R, drawdown, profit factor, payoff, expectativa, sequências, score de disciplina, painel de risco) seguem as mesmas fórmulas da planilha Excel `Gestao_Risco_Diario_Trade.xlsx`. Os 29 indicadores do exemplo foram conferidos contra a planilha.
+- Capacidade: sem limite fixo de trades (o localStorage comporta milhares de registros).
 
-Ao concluir a ficha, o usuário confirma o aviso de armazenamento, faz a verificação de segurança e escolhe **Enviar cópia e salvar PDF**. A ficha só informa que a cópia foi guardada e abre a impressão depois que o Supabase confirma o recebimento. Em caso de falha, os dados continuam no navegador para permitir uma nova tentativa. Também há uma opção separada para salvar apenas o PDF.
+## Aviso
 
-Os registros ficam em `pre_venda_cadastros`; a área administrativa exige login e a política RLS limita a consulta ao usuário proprietário configurado. A ficha inclui dados pessoais: restrinja o acesso à conta administrativa e compartilhe os PDFs com cuidado.
+Ferramenta de controle e organização. Não constitui recomendação de investimento. Valores de ponto, custos e limites de risco são premissas suas.
